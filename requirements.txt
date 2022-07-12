@@ -1,0 +1,9 @@
+gym
+notebook
+tensorflow
+matplotlib
+seaborn
+ipykernel
+numpy
+pandas
+gym[classic_control]
