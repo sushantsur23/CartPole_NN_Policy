@@ -2,6 +2,7 @@ gym
 notebook
 matplotlib
 ipykernel
+tensorflow
 numpy
 tqdm
 pandas
