@@ -3,5 +3,6 @@ notebook
 matplotlib
 ipykernel
 numpy
+tqdm
 pandas
 gym[classic_control]
