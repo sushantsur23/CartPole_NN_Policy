@@ -1,44 +1,46 @@
+from bdb import Breakpoint
 import gym
 import numpy as np
 import time
 from tqdm import tqdm
 
-env = gym.make('CartPole-v0')
+env = gym.make("CartPole-v1")
 
-# def basic_policy(angle):
-#     if angle<0: #falling left
-#         return 0 #move left
-#     else:
-#         return 1  #move right
-
-def basic_policy(pole_angle):
-    if pole_angle<0: #falling left
-        return 0 #move left
-    return 1  #move right
+# def basic_policy(PoleAngle):
+#     if PoleAngle < 0: # falling left
+#         return 0 # Move left
+#     else: # Move right
+#         return 1 
+def basic_policy(PoleAngle):
+    if PoleAngle < 0: # falling left
+        return 0 # Move left
+    return 1 
 
 total_rewards = list()
 
 N_episodes = 200
-N_Steps = 200
+N_steps = 200
 
 for episode in range(N_episodes):
     rewards = 0
-    #cat position, cart velocity, pole angle, pole velocity
-    observation = env.reset()
-    pole_angle = observation[2]
-    for step in tqdm(range(N_Steps)):
+    # CartPoistion, CartVelocity, PoleAngle, PoleAngularVelocity
+    Observations = env.reset()
+    PoleAngle = Observations[2]
+    for step in tqdm(range(N_steps)):
         env.render()
-        action = basic_policy(pole_angle)
-        observation, reward, done, info = env.step(action)
-        time.sleep(0.001)
-        rewards+= rewards
-        if done:   #fallen
+        action = basic_policy(PoleAngle)
+        Observations, reward, done, info = env.step(action)
+        time.sleep(0.001) # sleep
+        rewards += reward
+        if done: # Fallen
             break
     total_rewards.append(rewards)
+
 stats = {
-    "mean":np.mean(total_rewards),
-    "std_dev":np.std(total_rewards),
+    "mean": np.mean(total_rewards),
+    "std": np.std(total_rewards),
     "min": np.min(total_rewards),
-    "max":np.max(total_rewards)
+    "max": np.max(total_rewards)
 }
+
 print(stats)
